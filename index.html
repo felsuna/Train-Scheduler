@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Scheduler</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Anytime is Train Time</h1>
+            <p class="lead">Choo choo. Chee chee.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Current Train Schedule
+            </div>
+            <div class="card-body">
+                <div id="row">
+                    <table class="table">
+                        <tr>
+                            <th>Train Name</th>
+                            <th>Destination</th>
+                            <th>First train of day</th>
+                            <th>Frequency (min)</th>
+                            <th>Next Arrival</th>
+                            <th>Mintues Away</th>
+                        </tr>
+                        <tr class="train-data">
+                            <td>The little engine that could</td>
+                            <td>North Pole</td>
+                            <td>08:00</td>
+                            <td>30</td>
+                            <td>?</td>
+                            <td>?</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                Add Train
+            </div>
+            <div class="card-body">
+                <form id="add-train-form">
+                    <h6>Train Name: </h6>
+                    <input class="form-control form-control-lg" id="train-name" type="text" required placeholder="Enter Train Name">
+                    <h6>Destination:</h6>
+                    <input class="form-control form-control-lg" id="destination" type="text" required placeholder="Enter Destination">
+                    <h6>First Train Time:</h6>
+                    <input class="form-control form-control-lg" id="first-train-time" type="text" required placeholder="HH:mm - military time">
+                    <h6>Frequency:</h6>
+                    <input class="form-control form-control-lg" id="frequency" type="text" required placeholder="Minute">
+                    <button type="submit" class="searchButton">Submit</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script src="assets/javascript/javascript.js"></script>
+
+</html>
