@@ -1,5 +1,3 @@
-console.log("works");
-
 var trainData = [];
 
 function displayTrains(){
@@ -42,3 +40,15 @@ $("#add-train-form").on("submit", function(event){
 
 trainData = JSON.parse(localStorage.getItem('train-data'));
 displayTrains();
+
+
+
+if (!Array.isArray(trainData)) {
+    trainData = [];
+  }
+  else if (!trainData === null) {
+      [""];
+  }
+ 
+
+  renderTodos(list);
