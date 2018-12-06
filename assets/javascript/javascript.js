@@ -1,25 +1,48 @@
-var trainData = [];
+function getTrains() {
+    trainArray = []
+    if (localStorage.getItem('train-data')) {
+        trainArray = JSON.parse(localStorage.getItem('train-data'));
+    } else {
+        alert('no trains please add one')
+    }
+}
 
-function displayTrains(){
+
+getTrains()
+displayTrains()
+
+function displayTrains() {
     $('.train-data').empty()
-    for (var i = 0; i  < trainData.length; i++) {
-        console.log(i)
+    for (var i = 0; i < trainArray.length; i++) {
+        var timeArray = trainArray[i].firstTrainTime.split(":");
+        var firstTrainTimeMoment = moment().hours(timeArray[0]).minutes(timeArray[1]).seconds("00");
+        var timeDifference = firstTrainTimeMoment.diff(moment(), "minutes");
+        //Max moment will determine if the train has already came for the day
+        //  We passed two moments an whichever is later gets stored to the variable maxMoment
+        var maxMoment = moment.max(moment(), firstTrainTimeMoment)
+        if (maxMoment == firstTrainTimeMoment) {
+            console.log("train has not arrived yet")
+            var nextArrival = firstTrainTimeMoment.format("hh:mm a")
+              var minutesAway = firstTrainTimeMoment.diff(moment(), "minutes");
+          } else {
+            console.log("trained has arrived")
+        }
+        console.log(timeDifference)
         var newRow = $(`
-        <tr>
-        <td>${trainData[i].trainName}</td>
-        <td>${trainData[i].destination}</td>
-        <td>${trainData[i].firstTrainTime}</td>
-        <td>${trainData[i].frequency}</td>
-        <td>?</td>
-        <td>?</td>
-        <tr>
-        `)
-       
+          <tr>
+          <td>${trainArray[i].trainName}</td>
+          <td>${trainArray[i].destination}</td>
+          <td>${trainArray[i].firstTrainTime}</td>
+          <td>${trainArray[i].frequency}</td>
+          <td>${nextArrival}</td>
+          <td>${minutesAway}</td>
+          <tr>
+          `)
         $('.train-data').append(newRow)
     }
 }
 
-$("#add-train-form").on("submit", function(event){
+$("#add-train-form").on("submit", function (event) {
     event.preventDefault();
     var trainName = $("#train-name").val();
     var destination = $("#destination").val();
@@ -32,23 +55,11 @@ $("#add-train-form").on("submit", function(event){
         frequency: frequency,
     }
     console.log(payload);
-    trainData.push(payload);
-    localStorage.setItem("train-data", JSON.stringify(trainData));
-
+    trainArray.push(payload);
+    localStorage.setItem("train-data", JSON.stringify(trainArray));
+    getTrains()
     displayTrains()
+    $("#add-train-form")[0].reset()
 })
 
-trainData = JSON.parse(localStorage.getItem('train-data'));
-displayTrains();
-
-
-
-if (!Array.isArray(trainData)) {
-    trainData = [];
-  }
-  else if (!trainData === null) {
-      [""];
-  }
- 
-
-  renderTodos(list);
+console.log(moment());
