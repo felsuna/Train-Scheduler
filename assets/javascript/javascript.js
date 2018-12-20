@@ -19,8 +19,7 @@ function displayTrains() {
         //We passed two moments an whichever is later gets stored to the variable maxMoment
         var maxMoment = moment.max(moment(), firstTrainTimeMoment)
         if (maxMoment == firstTrainTimeMoment) {
-            console.log("train has not arrived yet")
-            var nextArrival = firstTrainTimeMoment.format("hh:mm a")
+              var nextArrival = firstTrainTimeMoment.format("hh:mm a")
               var minutesAway = firstTrainTimeMoment.diff(moment(), "minutes");
           } else {
             //differenceTime is how long it has passed since the 1st train of the day.
