@@ -62,7 +62,6 @@ $("#add-train-form").on("submit", function (event) {
         firstTrainTime: firstTrainTime,
         frequency: frequency,
     }
-    console.log(payload);
     trainArray.push(payload);
     localStorage.setItem("train-data", JSON.stringify(trainArray));
     getTrains()
