@@ -18,7 +18,7 @@ function displayTrains() {
         var firstTrainTimeMoment = moment().hours(timeArray[0]).minutes(timeArray[1]).seconds("00");
         var timeDifference = firstTrainTimeMoment.diff(moment(), "minutes");
         //Max moment will determine if the train has already came for the day
-        //  We passed two moments an whichever is later gets stored to the variable maxMoment
+        //We passed two moments an whichever is later gets stored to the variable maxMoment
         var maxMoment = moment.max(moment(), firstTrainTimeMoment)
         if (maxMoment == firstTrainTimeMoment) {
             console.log("train has not arrived yet")
@@ -26,8 +26,19 @@ function displayTrains() {
               var minutesAway = firstTrainTimeMoment.diff(moment(), "minutes");
           } else {
             console.log("trained has arrived")
+            //differenceTime is how long it has passed since the 1st train of the day.
+            var differenceTime = moment().diff(firstTrainTimeMoment, "minutes");
+            
+            //tRemainder is the leftover of taking the diffenceTime of the modulus frequency.
+            var tRemainder = differenceTime % trainArray[i].frequency;
+
+            //minutesAway takes the frequency and subtracts the remainder.
+            var minutesAway = trainArray[i].frequency - tRemainder;
+            
+            //nextArrival is the currentTime plaus the minutesAway.
+            var nextArrival = moment().add(minutesAway, "m").format("hh:mm a")
         }
-        console.log(timeDifference)
+        
         var newRow = $(`
           <tr>
           <td>${trainArray[i].trainName}</td>
@@ -61,5 +72,7 @@ $("#add-train-form").on("submit", function (event) {
     displayTrains()
     $("#add-train-form")[0].reset()
 })
-
-console.log(moment());
+setInterval(function(){
+    displayTrains();
+    console.log("Trains are updated.")
+},5000)
