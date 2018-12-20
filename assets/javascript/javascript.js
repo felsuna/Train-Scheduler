@@ -2,8 +2,6 @@ function getTrains() {
     trainArray = []
     if (localStorage.getItem('train-data')) {
         trainArray = JSON.parse(localStorage.getItem('train-data'));
-    } else {
-        alert('no trains please add one')
     }
 }
 
@@ -25,7 +23,6 @@ function displayTrains() {
             var nextArrival = firstTrainTimeMoment.format("hh:mm a")
               var minutesAway = firstTrainTimeMoment.diff(moment(), "minutes");
           } else {
-            console.log("trained has arrived")
             //differenceTime is how long it has passed since the 1st train of the day.
             var differenceTime = moment().diff(firstTrainTimeMoment, "minutes");
             
@@ -74,5 +71,4 @@ $("#add-train-form").on("submit", function (event) {
 })
 setInterval(function(){
     displayTrains();
-    console.log("Trains are updated.")
-},5000)
+},5000);
